@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Film Explorer</title>
+</head>
+
+<body>
+    <header>
+        <h1 class="text-center display-1" id="title">Film Explorer</h1>
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" onclick="displayMenuMovies()">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <p class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Genres
+                            </p>
+                            <ul id="genres-dropdown" class="dropdown-menu">
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <p class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Note
+                            </p>
+                            <ul id="note-dropdown" class="dropdown-menu">
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search Movies" autocomplete="off" aria-label="Search" id="search">
+                        <button class="btn btn-outline-success" type="button" onclick="searchMovie(1)">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!-- Section 1 : Carousel for movies -->
+        <section id="section1" style="padding-top: 3vh; width: 40%; margin: auto;">
+            <div id="carouselExampleAutoplaying" class="carousel slide carousel-fade text-center w-75 m-auto" data-bs-ride="carousel">
+                <div id="carousel" class="carousel-inner">
+                    <!-- Carousel items will be inserted here dynamically -->
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+        <!-- Section 2 : List of movies -->
+        <section id="section2" class="d-flex w-75 m-auto justify-content-around flex-wrap gap-3">
+        </section>
+    </main>
+    <!-- Movie Info Modal -->
+    <div class="modal fade" id="movieInfoModal" tabindex="-1" aria-labelledby="movieInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="movieInfoModalLabel">Movie Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Selecteur de page -->
+    <div id="pagination" class="pagination-container" style="display: none;">
+        <button id="prevPage" onclick="changePage(-1)">Précédent</button>
+        <p id="page-number">1</p><p>sur</p><p id="page-max"></p>
+        <button id="nextPage" onclick="changePage(1)">Suivant</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
