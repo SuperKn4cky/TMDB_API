@@ -4,9 +4,49 @@
     right: 20px;
     display: flex;
     gap: 10px;
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 10px;
+    text-align: center;
+    padding: 5px;
+}
+
+.pagination-container p {
+    margin: auto;
 }
 
 #prevPage,
 #nextPage {
     padding: 5px 10px;
+}
+
+.card {
+    width: 180px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-link .card {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.card-link:hover .card {
+    transform: scale(1.05);
+}
+
+.card-text {
+    font-size: 14px;
+    color: #333;
 }

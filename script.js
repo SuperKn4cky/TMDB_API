@@ -12,6 +12,7 @@ function home() {
 }
 
 async function displayMenuMovies() {
+    document.getElementById("title").textContent = "Film Explorer";
     let movieDisplay = document.getElementById("section2");
     movieDisplay.innerHTML = "";
     
@@ -27,6 +28,7 @@ async function displayMenuMovies() {
 }
     
 function constructCarouselItem(movies) {
+    document.querySelector("#section1").style.display = "block";
     const carouselInner = document.getElementById("carousel");
     carouselInner.innerHTML = "";
 
@@ -76,15 +78,18 @@ inputButton.onkeyup = function(e){
 function displayMovieList(movies, parentElement) {
     parentElement.innerHTML = "";
     movies.forEach(movie => {
+        const date = movie.release_date = movie.release_date ? movie.release_date.split('-')[0] : "Inconnue";
         let poster = movie.poster_path ? `<img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" class="card-img-top" alt="${movie.title}">` : `<img src="https://placehold.co/200x300?text=Image+indisponible" class="card-img-top" alt="${movie.title}">`;
         let movieElementHtml = `
-            <div class="card w-25 mt-3 text-center">
-            ${poster}
-                <div class="card-body">
-                    <h5 class="card-title">${movie.title}</h5>
-                    <button class="btn btn-primary" onclick="showMovieInfo('${movie.id}')">Info</button>
+            <a href="#" onclick="showMovieInfo('${movie.id}')" class="card-link">
+                <div class="card mt-3 text-center">
+                ${poster}
+                    <div class="card-body">
+                        <h5 class="card-title">${movie.title}</h5>
+                        <p class="card-text">${movie.vote_average}⭐- ${date}</p>
+                    </div>
                 </div>
-            </div>`;
+            </a>`;
         parentElement.insertAdjacentHTML("beforeend", movieElementHtml);
     });
 }
@@ -144,7 +149,7 @@ function handleGenre(e) {
 }
 
 function loadMovies(url, tile) {
-    document.getElementById("carousel").innerHTML = "";
+    document.querySelector("#section1").style.display = "none";
     document.getElementById("section2").innerHTML = "";
     document.getElementById("title").textContent = tile;
     document.getElementById("page-number").textContent = currentPage;
@@ -165,13 +170,26 @@ function capitalize(str){
 
 
 function constructDropdownNote() {
-    document.getElementById("note-dropdown").innerHTML = "";
-        for(let i = 1; i <= 10; i++) {
-            let stars = '⭐'.repeat(i);
-            let itemElement = `<li><p class="dropdown-item" id="${i}" onclick="handleNote(event)" style="text-align:center;">${stars}</p></li>`;
-            document.getElementById("note-dropdown").insertAdjacentHTML("beforeend", itemElement);
-        }
+    const dropdown = document.getElementById("note-dropdown");
+    dropdown.innerHTML = "";
+  
+    const fragment = document.createDocumentFragment();
+    for (let i = 1; i <= 10; i++) {
+        const listItem = document.createElement("li");
+        const itemElement = document.createElement("p");
+        
+        itemElement.className = "dropdown-item";
+        itemElement.id = i;
+        itemElement.textContent = `⭐ (${i}/10)`;
+        itemElement.onclick = handleNote;
+        listItem.appendChild(itemElement);
+        fragment.appendChild(listItem);
+    }
+    
+    dropdown.appendChild(fragment);
 }
+  
+  
 
 function handleNote(e) {
     e.preventDefault();
